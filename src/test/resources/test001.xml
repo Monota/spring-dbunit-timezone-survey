@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<dataset>
+    <sample id="1"
+            name="Monota"
+            mail="test1@example.com"
+            created_at="2016-01-09 18:59:21"
+            created_at_timezone="2016-01-09 18:59:21"/>
+    <sample id="2"
+            name="Akanex"
+            mail="test2@example.com"
+            created_at="2016-01-09 18:59:49"
+            created_at_timezone="2016-01-09 18:59:49"/>
+    <sample id="3"
+            name="Aratax"
+            mail="test3@example.com"
+            created_at="2016-01-09 19:00:14"
+            created_at_timezone="2016-01-09 19:00:14"/>
+    <sample id="4"
+            name="Makoto"
+            mail="test4@example.com"
+            created_at="2016-01-09 20:00:27"
+            created_at_timezone="2016-01-09 20:00:27"/>
+</dataset>

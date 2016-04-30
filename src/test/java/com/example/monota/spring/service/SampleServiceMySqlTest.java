@@ -4,6 +4,8 @@ import com.example.monota.spring.SpringSampleApplication;
 import org.dbunit.DataSourceDatabaseTester;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.dataset.excel.XlsDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,8 +29,8 @@ public class SampleServiceMySqlTest {
 	private DataSource dataSource;
 
 	@Test
-	public void test001() throws Exception {
-		// Cell format type is Date (Number).
+	public void testExcel001() throws Exception {
+		// Using Excel: Cell format type is Date (Number).
 		IDatabaseTester databaseTester = new DataSourceDatabaseTester(dataSource);
 		databaseTester.setDataSet(new XlsDataSet(ResourceUtils.getFile("classpath:test001.xlsx")));
 		databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
@@ -37,8 +39,8 @@ public class SampleServiceMySqlTest {
 	}
 
 	@Test
-	public void test002() throws Exception {
-		// Cell format type is String.
+	public void testExcel002() throws Exception {
+		// Using Excel: Cell format type is String.
 		IDatabaseTester databaseTester = new DataSourceDatabaseTester(dataSource);
 		databaseTester.setDataSet(new XlsDataSet(ResourceUtils.getFile("classpath:test002.xlsx")));
 		databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
@@ -47,10 +49,20 @@ public class SampleServiceMySqlTest {
 	}
 
 	@Test
-	public void test003() throws Exception {
-		// Cell format type is String with timezone.
+	public void testExcel003() throws Exception {
+		// Using Excel: Cell format type is String with timezone.
 		IDatabaseTester databaseTester = new DataSourceDatabaseTester(dataSource);
 		databaseTester.setDataSet(new XlsDataSet(ResourceUtils.getFile("classpath:test003.xlsx")));
+		databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
+		databaseTester.onSetup();
+		sampleService.execute();
+	}
+
+	@Test
+	public void testXml001() throws Exception {
+		// Using XML
+		IDatabaseTester databaseTester = new DataSourceDatabaseTester(dataSource);
+		databaseTester.setDataSet(new FlatXmlDataSetBuilder().build(ResourceUtils.getFile("classpath:test001.xml")));
 		databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
 		databaseTester.onSetup();
 		sampleService.execute();
