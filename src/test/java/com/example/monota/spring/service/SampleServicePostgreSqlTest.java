@@ -34,6 +34,7 @@ public class SampleServicePostgreSqlTest {
 	@Test
 	public void testExcel001() throws Exception {
 		// Using Excel: Cell format type is Date (Number).
+		// The input data is automatically added/substracted timezone offset.
 		IDatabaseTester databaseTester = new DataSourceDatabaseTester(dataSource);
 		databaseTester.setDataSet(new XlsDataSet(ResourceUtils.getFile("classpath:test001.xlsx")));
 		databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
@@ -46,6 +47,7 @@ public class SampleServicePostgreSqlTest {
 	@Test
 	public void testExcel002() throws Exception {
 		// Using Excel: Cell format type is String.
+		// The input data is NOT automatically added/substracted timezone offset.
 		IDatabaseTester databaseTester = new DataSourceDatabaseTester(dataSource);
 		databaseTester.setDataSet(new XlsDataSet(ResourceUtils.getFile("classpath:test002.xlsx")));
 		databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
