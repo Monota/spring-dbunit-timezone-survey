@@ -4,7 +4,10 @@ import javax.sql.DataSource;
 
 import org.dbunit.DataSourceDatabaseTester;
 import org.dbunit.IDatabaseTester;
+import org.dbunit.database.DatabaseConnection;
+import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.excel.XlsDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.Test;
@@ -15,6 +18,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.ResourceUtils;
 
 import com.example.monota.spring.SpringSampleApplication;
+
+import java.io.FileOutputStream;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(SpringSampleApplication.class)
@@ -34,6 +39,8 @@ public class SampleServicePostgreSqlTest {
 		databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
 		databaseTester.onSetup();
 		sampleService.execute();
+		IDataSet resultDataSet = new DatabaseConnection(dataSource.getConnection()).createDataSet();
+		XlsDataSet.write(resultDataSet, new FileOutputStream("target/test001-postgresql-result.xls"));
 	}
 
 	@Test
@@ -44,6 +51,8 @@ public class SampleServicePostgreSqlTest {
 		databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
 		databaseTester.onSetup();
 		sampleService.execute();
+		IDataSet resultDataSet = new DatabaseConnection(dataSource.getConnection()).createDataSet();
+		XlsDataSet.write(resultDataSet, new FileOutputStream("target/test002-postgresql-result.xls"));
 	}
 
 	@Test
@@ -54,6 +63,8 @@ public class SampleServicePostgreSqlTest {
 		databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
 		databaseTester.onSetup();
 		sampleService.execute();
+		IDataSet resultDataSet = new DatabaseConnection(dataSource.getConnection()).createDataSet();
+		XlsDataSet.write(resultDataSet, new FileOutputStream("target/test003-postgresql-result.xls"));
 	}
 
 	@Test
@@ -64,5 +75,7 @@ public class SampleServicePostgreSqlTest {
 		databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
 		databaseTester.onSetup();
 		sampleService.execute();
+		IDataSet resultDataSet = new DatabaseConnection(dataSource.getConnection()).createDataSet();
+		FlatXmlDataSet.write(resultDataSet, new FileOutputStream("target/test001-postgresql-result.xml"));
 	}
 }

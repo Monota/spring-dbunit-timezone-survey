@@ -3,6 +3,8 @@ package com.example.monota.spring.service;
 import com.example.monota.spring.SpringSampleApplication;
 import org.dbunit.DataSourceDatabaseTester;
 import org.dbunit.IDatabaseTester;
+import org.dbunit.database.DatabaseConnection;
+import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.excel.XlsDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
@@ -16,6 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.ResourceUtils;
 
 import javax.sql.DataSource;
+import java.io.FileOutputStream;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(SpringSampleApplication.class)
@@ -36,6 +39,8 @@ public class SampleServiceMySqlTest {
 		databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
 		databaseTester.onSetup();
 		sampleService.execute();
+		IDataSet resultDataSet = new DatabaseConnection(dataSource.getConnection()).createDataSet();
+		XlsDataSet.write(resultDataSet, new FileOutputStream("target/test001-mysql-result.xls"));
 	}
 
 	@Test
@@ -46,6 +51,8 @@ public class SampleServiceMySqlTest {
 		databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
 		databaseTester.onSetup();
 		sampleService.execute();
+		IDataSet resultDataSet = new DatabaseConnection(dataSource.getConnection()).createDataSet();
+		XlsDataSet.write(resultDataSet, new FileOutputStream("target/test002-mysql-result.xls"));
 	}
 
 	@Test
@@ -56,6 +63,8 @@ public class SampleServiceMySqlTest {
 		databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
 		databaseTester.onSetup();
 		sampleService.execute();
+		IDataSet resultDataSet = new DatabaseConnection(dataSource.getConnection()).createDataSet();
+		XlsDataSet.write(resultDataSet, new FileOutputStream("target/test003-mysql-result.xls"));
 	}
 
 	@Test
@@ -66,5 +75,7 @@ public class SampleServiceMySqlTest {
 		databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
 		databaseTester.onSetup();
 		sampleService.execute();
+		IDataSet resultDataSet = new DatabaseConnection(dataSource.getConnection()).createDataSet();
+		FlatXmlDataSet.write(resultDataSet, new FileOutputStream("target/test001-mysql-result.xml"));
 	}
 }
