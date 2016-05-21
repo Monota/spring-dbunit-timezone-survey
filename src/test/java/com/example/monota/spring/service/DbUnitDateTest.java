@@ -57,6 +57,11 @@ public class DbUnitDateTest {
 	@Test
 	public void useXlsNumberCellForTimestamp() throws Exception {
 		// This test will fail.
+		/*
+			java.lang.AssertionError:
+			Expected: is <Sat Jan 09 18:59:21 JST 2016>
+			     but: was <Sun Jan 10 03:59:21 JST 2016>
+		 */
 		this.testExec("classpath:test001.xlsx");
 	}
 
