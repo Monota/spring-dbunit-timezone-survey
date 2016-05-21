@@ -57,6 +57,7 @@ public class DbUnitDateTest {
 	@Test
 	public void useXlsNumberCellForTimestamp() throws Exception {
 		// This test will fail.
+		// -> Issue fixed in dbunit-2.5.3
 		/*
 			java.lang.AssertionError:
 			Expected: is <Sat Jan 09 18:59:21 JST 2016>
