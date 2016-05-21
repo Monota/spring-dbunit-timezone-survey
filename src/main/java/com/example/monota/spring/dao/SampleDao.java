@@ -8,6 +8,6 @@ import com.example.monota.spring.entity.Sample;
 
 public interface SampleDao {
 
-	@Select("SELECT * FROM sample")
+	@Select("SELECT * FROM sample ORDER BY id")
 	List<Sample> selectAll();
 }
